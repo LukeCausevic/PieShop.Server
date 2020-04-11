@@ -10,10 +10,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-nanoserver-1903 AS build
 WORKDIR /src
-COPY ["PieShop.Server.csproj", ""]
-RUN dotnet restore "./PieShop.Server.csproj"
+COPY ["PieShop.Server/PieShop.Server.csproj", "PieShop.Server/"]
+RUN dotnet restore "PieShop.Server/PieShop.Server.csproj"
 COPY . .
-WORKDIR "/src/."
+WORKDIR "/src/PieShop.Server"
 RUN dotnet build "PieShop.Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
